@@ -26,8 +26,6 @@ export default function App() {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // ... (Keep all your existing useState hooks and useEffects here)
-
   const togglePlayAudio = () => {
     if (!audioRef.current) return;
     if (isPlayingAudio) {
@@ -38,12 +36,11 @@ export default function App() {
     }
   };
 
-  // Ensure this return block is at the end of the App function
   return (
     <div className="min-h-screen bg-burgundy-950 text-burgundy-50 font-sans relative overflow-x-hidden selection:bg-gold-500 selection:text-burgundy-950">
-      <audio ref={audioRef} src="/media/sparks.mp3" loop preload="auto" />
+      {/* Audio path updated to relative path to resolve 404 errors on GitHub Pages */}
+      <audio ref={audioRef} src="media/sparks.mp3" loop preload="auto" />
       
-      {/* Your UI logic goes here */}
       <div className="p-10 text-center">
         <h1>Yara & Ahmed</h1>
       </div>
