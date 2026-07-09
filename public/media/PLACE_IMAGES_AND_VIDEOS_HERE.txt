@@ -1,0 +1,8 @@
+Place all your website images and videos in this folder ('/public/media/').
+Once uploaded, they will be accessible in your website under the path `/media/your-file-name.ext`.
+
+For example:
+- If you upload 'hero_bg.jpg' to this folder, its URL in the app will be `/media/hero_bg.jpg`
+- If you upload 'product_video.mp4', its URL in the app will be `/media/product_video.mp4`
+
+You can use the file explorer on the left-hand side of Google AI Studio to upload files directly into this directory!

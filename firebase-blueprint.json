@@ -1,0 +1,72 @@
+{
+  "entities": {
+    "rsvp": {
+      "title": "RSVP Submission",
+      "description": "Details about a guest's RSVP response.",
+      "type": "object",
+      "properties": {
+        "guestName": {
+          "type": "string",
+          "description": "The name of the primary guest."
+        },
+        "attending": {
+          "type": "boolean",
+          "description": "Whether the guest is attending the wedding."
+        },
+        "dietary": {
+          "type": "string",
+          "description": "Any dietary requirements or allergies."
+        },
+        "guestsCount": {
+          "type": "integer",
+          "description": "The number of additional guests accompanying."
+        },
+        "message": {
+          "type": "string",
+          "description": "A congratulatory message to the couple."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the RSVP was submitted."
+        }
+      },
+      "required": ["guestName", "attending", "guestsCount", "createdAt"]
+    },
+    "photo": {
+      "title": "Guest Gallery Photo",
+      "description": "A guest-uploaded photo and caption shared to the gallery.",
+      "type": "object",
+      "properties": {
+        "guestName": {
+          "type": "string",
+          "description": "The name of the guest who uploaded the photo."
+        },
+        "photoUrl": {
+          "type": "string",
+          "description": "The image source URL or base64 data string."
+        },
+        "caption": {
+          "type": "string",
+          "description": "Optional text caption for the photo."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the photo was uploaded."
+        }
+      },
+      "required": ["guestName", "photoUrl", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/rsvps/{rsvpId}": {
+      "schema": "rsvp",
+      "description": "RSVP submissions from wedding guests."
+    },
+    "/photos/{photoId}": {
+      "schema": "photo",
+      "description": "Guest-shared wedding photos for the live gallery."
+    }
+  }
+}

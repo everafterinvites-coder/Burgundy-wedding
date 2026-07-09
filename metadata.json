@@ -1,0 +1,6 @@
+{
+  "name": "Asset Portal",
+  "description": "An elegant dashboard to upload, manage, and preview media assets for your future website.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

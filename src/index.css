@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Montserrat", system-ui, sans-serif;
+  
+  --color-burgundy-50: #fcf4f5;
+  --color-burgundy-100: #f7e6e9;
+  --color-burgundy-200: #efaec8;
+  --color-burgundy-300: #df7ca2;
+  --color-burgundy-400: #ca4d7b;
+  --color-burgundy-500: #b02a5b;
+  --color-burgundy-600: #931b46;
+  --color-burgundy-700: #751234;
+  --color-burgundy-800: #580c25;
+  --color-burgundy-900: #3c0617;
+  --color-burgundy-950: #22020a;
+  
+  --color-gold-50: #fbf9f1;
+  --color-gold-100: #f5f0db;
+  --color-gold-200: #ebdcae;
+  --color-gold-300: #dec17c;
+  --color-gold-400: #cda34d;
+  --color-gold-500: #bd862b;
+  --color-gold-600: #a06b20;
+  --color-gold-700: #805018;
+  --color-gold-800: #603912;
+  --color-gold-900: #40230a;
+  --color-gold-950: #281405;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-burgundy-950);
+  color: var(--color-burgundy-100);
+}
+
+.font-serif-lux {
+  font-family: var(--font-serif);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #f5f0db 0%, #cda34d 50%, #bd862b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-gold-gradient {
+  border-image: linear-gradient(135deg, #f5f0db 0%, #cda34d 50%, #bd862b 100%) 1;
+}
+
+/* Custom scrollbar for an elegant feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #22020a;
+}
+::-webkit-scrollbar-thumb {
+  background: #cda34d;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #bd862b;
+}
