@@ -1,77 +1,49 @@
-import React, { useState, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
-
-export default function App() {
-  const [curtainEnded, setCurtainEnded] = useState(false);
-  const [skipCurtain, setSkipCurtain] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  const [mediaErrors, setMediaErrors] = useState<Record<string, boolean>>({});
-  const handleMediaError = (key: string) => setMediaErrors((prev) => ({ ...prev, [key]: true }));
-
-  const showMainSite = curtainEnded || skipCurtain;
-  
-  // This ensures the path correctly points to /burgundy-wedding/media/
-  const basePath = "/burgundy-wedding";
+// ... (Keep all your existing imports and state/logic up to the end of the functions) ...
 
   return (
-    <div className="min-h-screen bg-burgundy-950 text-burgundy-50 font-sans relative overflow-x-hidden">
-      <audio ref={audioRef} src={`${basePath}/media/sparks.mp3`} loop preload="auto" />
-
+    <div className="min-h-screen bg-burgundy-950 text-burgundy-50 font-sans selection:bg-gold-500 selection:text-burgundy-950">
+      {/* 1. CURTAINS INTRO */}
       <AnimatePresence>
         {!showMainSite && (
           <motion.div 
             key="curtains-screen"
-            initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-burgundy-950 cursor-pointer"
             onClick={() => setSkipCurtain(true)}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-burgundy-950 overflow-hidden cursor-pointer"
           >
-            <div className="absolute inset-0 w-full h-full object-cover">
-              {!mediaErrors["curtains"] ? (
-                <video 
-                  src={`${basePath}/media/curtains.mp4`} 
-                  autoPlay 
-                  muted 
-                  playsInline
-                  onEnded={() => setCurtainEnded(true)}
-                  onError={() => handleMediaError("curtains")}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="absolute inset-0 bg-gradient-to-r from-burgundy-950 via-burgundy-800 to-burgundy-950" />
-              )}
-            </div>
+            <video 
+              src="/media/curtains.MOV" 
+              autoPlay muted playsInline
+              onEnded={() => setCurtainEnded(true)}
+              className="w-full h-full object-cover"
+            />
           </motion.div>
         )}
       </AnimatePresence>
 
-      <div className="relative min-h-screen w-full">
-        <div className="absolute inset-0 z-0 w-full h-full">
-          <video 
-            src={`${basePath}/media/chandelier.mp4`} 
-            autoPlay 
-            muted 
-            loop 
-            playsInline
-            className="w-full h-full object-cover opacity-60"
-          />
-        </div>
-        
-        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8">
-          <div className="bg-burgundy-950/80 p-10 rounded-xl text-center shadow-2xl border border-gold-500/30">
-            <h1 className="text-5xl font-serif text-cream-100">
-              Yara & Ahmed
-            </h1>
-            <p className="mt-6 text-xl text-cream-200">We are so excited to celebrate with you!</p>
-            
-            <div className="h-[1000px] mt-10">
-              <p className="text-sm text-gold-300">Scroll down to see more...</p>
+      {/* 2. MAIN SITE */}
+      {showMainSite && (
+        <main>
+          {/* Header Section */}
+          <section className="relative min-h-screen flex items-center justify-center">
+             <div className="text-center bg-burgundy-950/80 p-10 rounded-xl border border-gold-500/30">
+              <h1 className="text-5xl font-serif">Yara & Ahmed</h1>
+              <p className="mt-6 text-xl">We are so excited to celebrate with you!</p>
             </div>
-          </div>
-        </div>
-      </div>
+          </section>
+
+          {/* ADD YOUR SECTIONS HERE */}
+          <section className="p-10 bg-burgundy-900">
+            <h2 className="text-3xl font-serif text-center">RSVP</h2>
+            {/* Insert your RSVP form code here */}
+          </section>
+          
+          <section className="p-10">
+            <h2 className="text-3xl font-serif text-center">Gallery</h2>
+            {/* Insert your Gallery grid code here */}
+          </section>
+        </main>
+      )}
     </div>
   );
 }
