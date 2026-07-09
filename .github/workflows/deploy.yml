@@ -10,8 +10,17 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   deploy:
+    # THIS SECTION WAS MISSING
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # END MISSING SECTION
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,15 +30,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm install
 
       - name: Build
         run: npm run build
-
-      - name: List dist folder (Debugging)
-        run: ls -R dist  # This will show us if the files are actually being created
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
