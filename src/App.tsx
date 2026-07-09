@@ -1,49 +1,52 @@
-// ... (Keep all your existing imports and state/logic up to the end of the functions) ...
+import React, { useState, useEffect, useRef } from "react";
+import { 
+  Heart, MapPin, Calendar, Clock, Image as ImageIcon, Sparkles, 
+  Upload, Trash2, Shield, Eye, Download, LogIn, Lock, 
+  Instagram, Check, RefreshCw, ChevronRight, Sparkle, 
+  Volume2, VolumeX, Database 
+} from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { addRsvp, getRsvps, deleteRsvp, addPhoto, subscribeToPhotos, deletePhoto } from "./firebase";
+import {
+  isSupabaseConfigured, getSupabaseCredentials, saveSupabaseCredentials,
+  clearSupabaseCredentials, testSupabaseConnection, syncRsvpToSupabase,
+  syncPhotoToSupabase, deleteRsvpFromSupabase, deletePhotoFromSupabase,
+  fetchSupabaseRsvps, fetchSupabasePhotos
+} from "./supabase";
 
+const SAMPLE_GALLERY = [
+  { id: "sample-1", guestName: "Yara & Ahmed", caption: "Our Engagement Session in Cairo", photoUrl: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80", createdAt: new Date().toISOString() },
+  { id: "sample-2", guestName: "Nour & Karim", caption: "Can't wait to celebrate with you!", photoUrl: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80", createdAt: new Date().toISOString() },
+  { id: "sample-3", guestName: "Ever After Invites", caption: "Perfect day for a perfect couple", photoUrl: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=800&q=80", createdAt: new Date().toISOString() }
+];
+
+export default function App() {
+  const [curtainEnded, setCurtainEnded] = useState(false);
+  const [skipCurtain, setSkipCurtain] = useState(false);
+  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // ... (Keep all your existing useState hooks and useEffects here)
+
+  const togglePlayAudio = () => {
+    if (!audioRef.current) return;
+    if (isPlayingAudio) {
+      audioRef.current.pause();
+      setIsPlayingAudio(false);
+    } else {
+      audioRef.current.play().then(() => setIsPlayingAudio(true)).catch(console.error);
+    }
+  };
+
+  // Ensure this return block is at the end of the App function
   return (
-    <div className="min-h-screen bg-burgundy-950 text-burgundy-50 font-sans selection:bg-gold-500 selection:text-burgundy-950">
-      {/* 1. CURTAINS INTRO */}
-      <AnimatePresence>
-        {!showMainSite && (
-          <motion.div 
-            key="curtains-screen"
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-burgundy-950 cursor-pointer"
-            onClick={() => setSkipCurtain(true)}
-          >
-            <video 
-              src="/media/curtains.MOV" 
-              autoPlay muted playsInline
-              onEnded={() => setCurtainEnded(true)}
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* 2. MAIN SITE */}
-      {showMainSite && (
-        <main>
-          {/* Header Section */}
-          <section className="relative min-h-screen flex items-center justify-center">
-             <div className="text-center bg-burgundy-950/80 p-10 rounded-xl border border-gold-500/30">
-              <h1 className="text-5xl font-serif">Yara & Ahmed</h1>
-              <p className="mt-6 text-xl">We are so excited to celebrate with you!</p>
-            </div>
-          </section>
-
-          {/* ADD YOUR SECTIONS HERE */}
-          <section className="p-10 bg-burgundy-900">
-            <h2 className="text-3xl font-serif text-center">RSVP</h2>
-            {/* Insert your RSVP form code here */}
-          </section>
-          
-          <section className="p-10">
-            <h2 className="text-3xl font-serif text-center">Gallery</h2>
-            {/* Insert your Gallery grid code here */}
-          </section>
-        </main>
-      )}
+    <div className="min-h-screen bg-burgundy-950 text-burgundy-50 font-sans relative overflow-x-hidden selection:bg-gold-500 selection:text-burgundy-950">
+      <audio ref={audioRef} src="/media/sparks.mp3" loop preload="auto" />
+      
+      {/* Your UI logic goes here */}
+      <div className="p-10 text-center">
+        <h1>Yara & Ahmed</h1>
+      </div>
     </div>
   );
 }
