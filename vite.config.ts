@@ -5,8 +5,8 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
   return {
-    // Changing base to './' tells Vite to use relative paths for your assets
-    base: './', 
+    // This base path is required for your repository name in the URL
+    base: '/burgundy-wedding/', 
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
