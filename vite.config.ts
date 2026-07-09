@@ -4,14 +4,17 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/burgundy-wedding/', // Required for GitHub Pages project sites
+  base: '/burgundy-wedding/',
   plugins: [react(), tailwindcss()],
-  build: {
-    outDir: 'dist', // Ensures the output folder matches your deploy.yml
-  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    // This forces Vite to put assets in a specific folder and use relative paths
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
+  }
 });
