@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import { motion } from "motion/react";
 import { Volume2, VolumeX } from "lucide-react";
-// Note: Ensure your firebase/supabase files are correctly exported if you add them back later
 
 export default function App() {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
@@ -36,6 +35,19 @@ export default function App() {
           <h1 className="text-5xl font-serif mb-4">Yara & Ahmed</h1>
           <p className="text-xl italic">We invite you to celebrate our special day.</p>
         </motion.div>
+
+        <section className="mt-12 p-6 bg-burgundy-900 rounded-lg max-w-md w-full">
+          <h2 className="text-2xl font-serif mb-4">RSVP</h2>
+          <form className="space-y-4 text-left">
+            <div>
+              <label className="block text-sm mb-1">Name</label>
+              <input type="text" className="w-full p-2 bg-burgundy-950 border border-gold-500 rounded" />
+            </div>
+            <button type="button" className="w-full py-2 bg-gold-600 text-burgundy-950 font-bold rounded">
+              Send RSVP
+            </button>
+          </form>
+        </section>
       </main>
     </div>
   );
