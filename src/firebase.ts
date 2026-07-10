@@ -1,10 +1,12 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, onSnapshot } from 'firebase/firestore';
+import { initializeApp, getApps } from 'firebase/app';
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot } from 'firebase/firestore';
 import firebaseConfig from '../firebase-applet-config.json';
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
+// Initialize Firebase only if it hasn't been initialized yet to prevent crashes
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
+
+// Initialize Firestore
+export const db = getFirestore(app);
 
 export enum OperationType {
   CREATE = 'create',
