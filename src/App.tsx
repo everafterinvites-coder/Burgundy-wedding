@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { motion } from "motion/react";
-import { Volume2, VolumeX } from "lucide-react";
+import { Volume2, VolumeX, ChevronDown } from "lucide-react";
 
 export default function App() {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
@@ -17,38 +17,41 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-rose-950 text-white font-sans selection:bg-gold-500 selection:text-burgundy-950">
+    <div className="min-h-screen bg-rose-950 text-gold-100 font-serif overflow-x-hidden">
       <audio ref={audioRef} src="media/sparks.mp3" loop preload="auto" />
       
-      <div className="flex justify-end p-6">
-        <button onClick={togglePlayAudio} className="text-gold-200">
+      {/* Hero Section */}
+      <div className="h-screen flex flex-col items-center justify-center relative border-b border-gold-800/30">
+        <button onClick={togglePlayAudio} className="absolute top-6 right-6 text-gold-500">
           {isPlayingAudio ? <Volume2 size={24} /> : <VolumeX size={24} />}
         </button>
-      </div>
 
-      <main className="flex flex-col items-center justify-center p-10 text-center">
         <motion.div 
-          initial={{ opacity: 0, y: 20 }} 
+          initial={{ opacity: 0, y: 30 }} 
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 1.5 }}
+          className="text-center"
         >
-          <h1 className="text-5xl font-serif mb-4">Yara & Ahmed</h1>
-          <p className="text-xl italic">We invite you to celebrate our special day.</p>
+          <p className="text-gold-500 uppercase tracking-widest text-sm mb-4">The Celebration of Love</p>
+          <h1 className="text-6xl md:text-8xl mb-6">Yara & Ahmed</h1>
+          <p className="text-2xl italic font-serif">Are Getting Married</p>
         </motion.div>
 
-        <section className="mt-12 p-6 bg-burgundy-900 rounded-lg max-w-md w-full">
-          <h2 className="text-2xl font-serif mb-4">RSVP</h2>
-          <form className="space-y-4 text-left">
-            <div>
-              <label className="block text-sm mb-1">Name</label>
-              <input type="text" className="w-full p-2 bg-burgundy-950 border border-gold-500 rounded" />
-            </div>
-            <button type="button" className="w-full py-2 bg-gold-600 text-burgundy-950 font-bold rounded">
-              Send RSVP
-            </button>
-          </form>
-        </section>
-      </main>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 1 }}
+          className="absolute bottom-10"
+        >
+          <p className="text-sm uppercase tracking-widest text-gold-700">Scroll to discover</p>
+          <ChevronDown className="mx-auto mt-2 text-gold-500 animate-bounce" />
+        </motion.div>
+      </div>
+
+      {/* Placeholder for the next section */}
+      <div className="p-10 text-center text-gold-500">
+        [Add next section here]
+      </div>
     </div>
   );
 }
